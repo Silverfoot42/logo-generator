@@ -8,7 +8,7 @@
     },
     "author": "",
     "license": "ISC",
-    "Dependencies": {
+    "dependencies": {
       "jest": "^24.9.0",
       "inquirer": "8.2.4"
     }
