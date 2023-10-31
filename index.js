@@ -1,7 +1,9 @@
+// Lets index.js use functionality from these files
 const inquirer = require('inquirer');
 const fs = require('fs');
 const { Circle, Triangle, Square } = require('./lib/shapes');
 
+// Prompts the user for answers to the questions for logo generation
 inquirer
     .prompt([
         {
@@ -37,6 +39,7 @@ inquirer
         writeToFile('logo.svg', logoContent);
 });
 
+// Creates the svg file
 function writeToFile(filename, data) {
     fs.writeFile(filename, data, (err) => 
         err ? console.log(err) : console.log('Generated logo.svg')
@@ -44,6 +47,7 @@ function writeToFile(filename, data) {
 }
 
 // Ai learning assistant helped with this
+// generates the logo using the answers to the users questions
 function generateLogo(data) {
   const { text, textColor, shape, shapeColor } = data;
   let svgContent = `<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">`;
