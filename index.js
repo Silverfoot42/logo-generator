@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const { Circle, Triangle, Square } = require('./lib/shapes');
 
 inquirer
     .prompt([
@@ -9,7 +10,7 @@ inquirer
             message: 'Enter the three letters you want in the logo:',
             validate: function (input) {
                 if (input.length > 3) {
-                    return "Vallue cannot exceed 3 letters";
+                    return "Value cannot exceed 3 letters";
                 }
                 return true;
             },
@@ -42,21 +43,22 @@ function writeToFile(filename, data) {
     );
 }
 
+// Ai learning assistant helped with this
 function generateLogo(data) {
-    // Create the SVG content based on the user input
   const { text, textColor, shape, shapeColor } = data;
   let svgContent = `<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">`;
   
-  // Add the shape based on the user's choice
   if (shape === 'circle') {
-    svgContent += `<circle cx="150" cy="100" r="50" fill="${shapeColor}" />`;
+    const circle = new Circle(shapeColor);
+    svgContent += circle.render();
   } else if (shape === 'triangle') {
-    svgContent += `<polygon points="150,50 100,150 200,150" fill="${shapeColor}" />`;
+    const triangle = new Triangle(shapeColor);
+    svgContent += triangle.render();
   } else if (shape === 'square') {
-    svgContent += `<rect x="100" y="50" width="100" height="100" fill="${shapeColor}" />`;
+    const square = new Square(shapeColor);
+    svgContent += square.render();
   }
   
-  // Add the text
   svgContent += `<text x="150" y="100" text-anchor="middle" dominant-baseline="middle" fill="${textColor}" font-size="24">${text}</text>`;
   
   svgContent += `</svg>`;
